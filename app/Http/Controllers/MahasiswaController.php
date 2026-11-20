@@ -34,4 +34,12 @@ class MahasiswaController extends Controller
         return view('mahasiswa.index', compact('mahasiswas'));
     }
 
+    public function destroy($id)
+    {
+        $mahasiswa = Mahasiswa::findOrFail($id);
+
+        $mahasiswa->delete();
+
+        return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil dihapus');
+    }
 }
