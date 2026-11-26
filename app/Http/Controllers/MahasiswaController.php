@@ -42,4 +42,24 @@ class MahasiswaController extends Controller
 
         return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil dihapus');
     }
+    
+    public function edit($id)
+    {
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        return view('mahasiswa.edit', compact('mahasiswa'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'nim'     => 'required|string|max:20',
+            'nama'    => 'required|string|max:255',
+            'jurusan' => 'required|string|max:100',
+        ]);
+        $mahasiswa = Mahasiswa::findOrFail($id);
+
+        $mahasiswa->update($validated);
+
+        return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil diperbarui!');
+    }
 }
