@@ -52,9 +52,11 @@ class MahasiswaController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'nim'     => 'required|string|max:20',
-            'nama'    => 'required|string|max:255',
+            'nim' => 'required|string|max:20',
+            'nama' => 'required|string|max:255',
+            'jenis_kelamin' => 'required|in:L,P',
             'jurusan' => 'required|string|max:100',
+            'alamat' => 'required',
         ]);
         $mahasiswa = Mahasiswa::findOrFail($id);
 
